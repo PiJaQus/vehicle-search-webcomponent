@@ -1,0 +1,18 @@
+export const vehicles = [
+  { id: '1', manufacturer: 'AUDI', model: 'A4', fuelType: 'DIESEL', price: 46990, initialRegistration: 2022, mileage: 51000 },
+  { id: '2', manufacturer: 'AUDI', model: 'Q3', fuelType: 'BENZIN', price: 39990, initialRegistration: 2021, mileage: 42000 },
+  { id: '3', manufacturer: 'BMW', model: '320i', fuelType: 'BENZIN', price: 35990, initialRegistration: 2020, mileage: 62000 },
+  { id: '4', manufacturer: 'BMW', model: 'i3', fuelType: 'ELEKTRO', price: 22990, initialRegistration: 2019, mileage: 48000 },
+  { id: '5', manufacturer: 'MERCEDES', model: 'C 220', fuelType: 'DIESEL', price: 41990, initialRegistration: 2021, mileage: 39000 },
+  { id: '6', manufacturer: 'MERCEDES', model: 'A 180', fuelType: 'BENZIN', price: 24990, initialRegistration: 2019, mileage: 70000 },
+  { id: '7', manufacturer: 'VW', model: 'Golf', fuelType: 'DIESEL', price: 19990, initialRegistration: 2018, mileage: 85000 },
+  { id: '8', manufacturer: 'VW', model: 'ID.3', fuelType: 'ELEKTRO', price: 28990, initialRegistration: 2021, mileage: 30000 },
+  { id: '9', manufacturer: 'SKODA', model: 'Octavia', fuelType: 'BENZIN', price: 21990, initialRegistration: 2020, mileage: 64000 },
+  { id: '10', manufacturer: 'SKODA', model: 'Kodiaq', fuelType: 'DIESEL', price: 32990, initialRegistration: 2020, mileage: 59000 },
+  { id: '11', manufacturer: 'CUPRA', model: 'Formentor', fuelType: 'BENZIN', price: 37990, initialRegistration: 2022, mileage: 22000 },
+  { id: '12', manufacturer: 'PEUGEOT', model: '408', fuelType: 'HYBRID', price: 46990, initialRegistration: 2023, mileage: 7000 },
+  { id: '13', manufacturer: 'OPEL', model: 'Astra', fuelType: 'DIESEL', price: 16990, initialRegistration: 2018, mileage: 96000 },
+  { id: '14', manufacturer: 'TESLA', model: 'Model 3', fuelType: 'ELEKTRO', price: 34990, initialRegistration: 2020, mileage: 54000 },
+  { id: '15', manufacturer: 'SEAT', model: 'Leon', fuelType: 'BENZIN', price: 18990, initialRegistration: 2019, mileage: 79000 },
+  { id: '16', manufacturer: 'VOLVO', model: 'XC40', fuelType: 'HYBRID', price: 38990, initialRegistration: 2021, mileage: 41000 },
+]
