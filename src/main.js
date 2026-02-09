@@ -24,4 +24,4 @@ class VehicleSearchElement extends HTMLElement {
   }
 }
 
-customElements.define('digital35-meinfahrzeugshop-suche', VehicleSearch)
+customElements.define('digital35-meinfahrzeugshop-suche', VehicleSearchElement)
