@@ -117,6 +117,7 @@ const formatPrice = (value) =>
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.12);
   opacity: 0.9;
+  background-color: aqua;
 }
 
 .price { font-weight: 800; font-size: 16px; margin-top: 6px; }
