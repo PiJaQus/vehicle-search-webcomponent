@@ -1,12 +1,41 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { vehicles } from './data/vehicles'
 
-const count = computed(() => vehicles.length)
+// filter state
+const selectedManufacturer = ref('')
+const selectedFuelType = ref('')
+const maxPrice = ref('')
 
-const formatPrice = (value) => {
-  return new Intl.NumberFormat('de-DE').format(value) + ' €'
+// options (static, simple)
+const manufacturers = [...new Set(vehicles.map(v => v.manufacturer))]
+const fuelTypes = [...new Set(vehicles.map(v => v.fuelType))]
+
+// filtered list
+const filteredVehicles = computed(() => {
+  return vehicles.filter(v => {
+    if (selectedManufacturer.value && v.manufacturer !== selectedManufacturer.value) {
+      return false
+    }
+    if (selectedFuelType.value && v.fuelType !== selectedFuelType.value) {
+      return false
+    }
+    if (maxPrice.value && v.price > Number(maxPrice.value)) {
+      return false
+    }
+    return true
+  })
+})
+const clearFilters = () => {
+  selectedManufacturer.value = ''
+  selectedFuelType.value = ''
+  maxPrice.value = ''
 }
+
+const count = computed(() => filteredVehicles.value.length)
+
+const formatPrice = (value) =>
+  new Intl.NumberFormat('de-DE').format(value) + ' €'
 </script>
 
 <template>
@@ -16,8 +45,35 @@ const formatPrice = (value) => {
       <p class="sub">Found {{ count }} vehicles</p>
     </header>
 
+    <!-- Filters -->
+    <section class="filters">
+      <select v-model="selectedManufacturer">
+        <option value="">All manufacturers</option>
+        <option v-for="m in manufacturers" :key="m" :value="m">
+          {{ m }}
+        </option>
+      </select>
+
+      <select v-model="selectedFuelType">
+        <option value="">All fuel types</option>
+        <option v-for="f in fuelTypes" :key="f" :value="f">
+          {{ f }}
+        </option>
+      </select>
+
+      <input
+        type="number"
+        placeholder="Max price (€)"
+        v-model="maxPrice"
+      />
+      <button type="button" class="clearBtn" @click="clearFilters">
+        Clear filters
+      </button>
+    </section>
+
+    <!-- Listing -->
     <section class="grid" aria-label="Vehicle listing">
-      <article v-for="v in vehicles" :key="v.id" class="card">
+      <article v-for="v in filteredVehicles" :key="v.id" class="card">
         <div class="cardTitle">{{ v.manufacturer }} {{ v.model }}</div>
 
         <div class="meta">
@@ -64,4 +120,19 @@ const formatPrice = (value) => {
 }
 
 .price { font-weight: 800; font-size: 16px; margin-top: 6px; }
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filters select,
+.filters input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 14px;
+}
 </style>
