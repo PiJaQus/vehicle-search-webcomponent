@@ -29,6 +29,57 @@ const setActive = (type) => {
 
 <template>
   <div class="panel">
+  
+    <div class="iconRow" role="radiogroup" aria-label="Kategorie">
+      <button
+        type="button"
+        class="iconBtn"
+        :class="{ active: activeType === 'LIMOUSINE' }"
+        @click="setActive('LIMOUSINE')"
+        aria-checked="true"
+        role="radio"
+        title="LIMOUSINE"
+      >
+        <img src="../assets/limusine.png" alt="LIMOUSINE" class="iconImg" />
+      </button>
+
+      <button
+        type="button"
+        class="iconBtn"
+        :class="{ active: activeType === 'COMBI' }"
+        @click="setActive('COMBI')"
+        role="radio"
+        :aria-checked="activeType === 'COMBI'"
+        title="COMBI"
+      >
+        <img src="../assets/combi.png" alt="COMBI" class="iconImg" />
+      </button>
+
+      <button
+        type="button"
+        class="iconBtn"
+        :class="{ active: activeType === 'KABRIO' }"
+        @click="setActive('KABRIO')"
+        role="radio"
+        :aria-checked="activeType === 'KABRIO'"
+        title="KABRIO"
+      >
+        <img src="../assets/kabrio.png" alt="KABRIO" class="iconImg" />
+      </button>
+
+      <button
+        type="button"
+        class="iconBtn"
+        :class="{ active: activeType === 'SUV' }"
+        @click="setActive('SUV')"
+        role="radio"
+        :aria-checked="activeType === 'SUV'"
+        title="SUV"
+      >
+        <img src="../assets/suv.png" alt="SUV" class="iconImg" />
+      </button>
+    </div>
+
     <div class="section">
       <div class="sectionTitle">Marke und Model</div>
 
