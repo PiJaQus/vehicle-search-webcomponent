@@ -23,6 +23,13 @@ const filteredVehicles = computed(() => {
     if (selectedFuelType.value && v.fuelType !== selectedFuelType.value) return false
     if (maxPrice.value && v.price > Number(maxPrice.value)) return false
     if (selectedCategory.value && v.category !== selectedCategory.value) return false
+
+    if (searchQuery.value && searchQuery.value.length >= 2) {
+      const q = searchQuery.value.toLowerCase()
+      const fullName = (v.manufacturer + ' ' + v.model).toLowerCase()
+      if (!fullName.includes(q)) return false
+    }
+
     return true
   })
 })
