@@ -55,6 +55,7 @@ const formatKm = (value) => new Intl.NumberFormat('de-DE').format(value) + ' km'
   <div class="shell">
     <header class="top">
       <div class="topInner">
+        <img src="./assets/digital35.png" alt="digital35" class="iconImg" />
         <div class="searchWrap">
           <input
             v-model="searchQuery"
@@ -63,46 +64,40 @@ const formatKm = (value) => new Intl.NumberFormat('de-DE').format(value) + ' km'
             type="text"
 
           />
-          <div class="hits">
-          <strong>{{ count }}</strong> Treffer
+          <button class="searchBtn" type="button" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" width="18" height="18">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" />
+            </svg>
+          </button>
         </div>
-        </div>
+
+        <button class="sortBtn" type="button" aria-label="Sortieren">
+          <span class="sortLabel">Sortieren</span>
+          <span class="sortChevron" aria-hidden="true">▾</span>
+        </button>
+
+        <a class="topLink" href="#">Suchauftrag</a>
+        <a class="topLink contact" href="#">Kontakt</a>
+
+        <div class="hitsPill"><strong>{{ count }}</strong>  Treffer</div>
       </div>
 
       <div v-if="hasActiveFilters" class="chipsRow" aria-label="Active filters">
-        <button
-          v-if="selectedManufacturer"
-          class="chip"
-          type="button"
-          @click="removeFilter('manufacturer')"
-        >
+        <button v-if="selectedManufacturer" class="chip" type="button" @click="removeFilter('manufacturer')">
           {{ selectedManufacturer }} <span class="x">×</span>
         </button>
 
-        <button
-          v-if="selectedCategory"
-          class="chip"
-          type="button"
-          @click="removeFilter('category')"
-        >
-        {{ selectedCategory }} <span class="x">×</span>
+        <button v-if="selectedCategory" class="chip" type="button" @click="removeFilter('category')">
+          {{ selectedCategory }} <span class="x">×</span>
         </button>
 
-        <button
-          v-if="maxPrice"
-          class="chip"
-          type="button"
-          @click="removeFilter('price')"
-        >
+        <button v-if="maxPrice" class="chip" type="button" @click="removeFilter('price')">
           bis {{ formatPrice(Number(maxPrice)) }} <span class="x">×</span>
         </button>
 
-        <button
-          v-if="selectedFuelType"
-          class="chip"
-          type="button"
-          @click="removeFilter('fuel')"
-        >
+        <button v-if="selectedFuelType" class="chip" type="button" @click="removeFilter('fuel')">
           {{ selectedFuelType }} <span class="x">×</span>
         </button>
 
@@ -146,7 +141,9 @@ const formatKm = (value) => new Intl.NumberFormat('de-DE').format(value) + ' km'
   background: #f6f7f8;
   min-height: 100vh;
   color: #0f0f10;
-
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .top {
@@ -160,73 +157,113 @@ const formatKm = (value) => new Intl.NumberFormat('de-DE').format(value) + ' km'
   padding: 14px 18px;
   display: flex;
   align-items: center;
-  gap: 0;              
+  gap: 14px;
 }
 
 .searchWrap{
-  position: relative;
   flex: 1;
-  height: 52px;
+  height: 46px;
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.015);
   display: flex;
   align-items: center;
-  padding-left: 16px;
-
+  padding: 0 6px 0 16px;
 }
 
 .search{
-  width: 100%;
+  flex: 1;
   height: 100%;
   border: 0;
   outline: none;
   background: transparent;
   font-size: 14px;
   color: rgba(0,0,0,0.85);
+  font-weight: 650;
 }
 
 .search::placeholder{
-  color: rgba(0,0,0,0.45);
+  color: rgba(0,0,0,0.40);
   font-weight: 600;
 }
 
-.hits{
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 13px;
-  font-weight: 800;
-  color: rgba(0,0,0,0.72);
-  white-space: nowrap;
+.searchBtn{
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: default;
+  color: rgba(0,0,0,0.55);
 }
+
+.searchBtn svg { display: block; }
 
 .searchWrap:focus-within{
   border-color: rgba(0,0,0,0.28);
+  background: #fff;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
-.searchBtn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
+.sortBtn {
+  height: 46px;
+  min-width: 170px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.10);
-  background: #fff;
-  display: grid;
-  place-items: center;
-  cursor: not-allowed; 
-  opacity: 0.9;
-  color: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.015);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 14px;
+  cursor: default;
+  color: rgba(0,0,0,0.70);
+  font-weight: 750;
 }
 
-.hits {
-  white-space: nowrap;
-  font-size: 13px;
+.sortChevron {
+  color: rgba(0,0,0,0.45);
+  font-size: 14px;
+  transform: translateY(-1px);
+}
+
+.favBtn {
+  position: relative;
+  height: 46px;
+  width: 56px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.015);
+  display: grid;
+  place-items: center;
+  cursor: default;
+  color: rgba(0,0,0,0.70);
+}
+
+.topLink {
+  text-decoration: none;
   color: rgba(0,0,0,0.62);
+  font-weight: 750;
+  font-size: 13px;
+  padding: 0 2px;
+  white-space: nowrap;
+}
+.topLink.contact { color: #2b8cff; }
+
+.hitsPill{
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.015);
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(0,0,0,0.70);
+  white-space: nowrap;
 }
 
 .chipsRow {
@@ -268,6 +305,6 @@ const formatKm = (value) => new Intl.NumberFormat('de-DE').format(value) + ' km'
 
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
-  .hits { display: none; }
+  .sortBtn, .topLink, .hitsPill { display: none; }
 }
 </style>
